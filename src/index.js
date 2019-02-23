@@ -3,6 +3,7 @@ import Vuetify from 'vuetify';
 import '@mdi/font/scss/materialdesignicons.scss';
 import 'vuetify/dist/vuetify.min.css';
 import NoteApp from '@/note-app';
+import store from '@/store';
 
 Vue.use(Vuetify, {
     iconfont: 'mdi',
@@ -10,6 +11,7 @@ Vue.use(Vuetify, {
 
 new Vue({
     el: '#app',
+    store,
     components: {
         NoteApp,
     },
