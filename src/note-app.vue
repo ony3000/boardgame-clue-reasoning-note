@@ -1,7 +1,12 @@
 <template>
     <v-app>
         <v-navigation-drawer app></v-navigation-drawer>
-        <v-toolbar app></v-toolbar>
+        <v-toolbar app>
+            <newgame-dialog></newgame-dialog>
+            <v-spacer></v-spacer>
+            <player-dialog></player-dialog>
+            <brush-dialog></brush-dialog>
+        </v-toolbar>
         <v-content>
             <v-container fluid grid-list-xs>
                 <evidence-note
@@ -23,11 +28,17 @@
 </template>
 
 <script>
+import NewgameDialog from '@/components/newgame-dialog';
+import PlayerDialog from '@/components/player-dialog';
+import BrushDialog from '@/components/brush-dialog';
 import EvidenceNote from '@/components/evidence-note';
 
 export default {
     name: 'note-app',
     components: {
+        NewgameDialog,
+        PlayerDialog,
+        BrushDialog,
         EvidenceNote,
     },
     computed: {
