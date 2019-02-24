@@ -12,20 +12,16 @@
                     </v-flex>
                 </v-layout>
             </v-flex>
-            <v-flex
-                xs4
-                v-for="(group, groupIndex) in 2"
-                :key="`colgroup-${groupIndex}`"
-            >
+            <v-flex xs8>
                 <v-layout row>
                     <v-flex
-                        xs4
-                        v-for="(column, columnIndex) in 3"
-                        :key="`cell-${groupIndex}-${columnIndex}`"
+                        xs2
+                        v-for="column in 6"
+                        :key="`cell-${column}`"
                     >
                         <v-card tile>
                             <v-card-text class="pa-0 text-xs-center">
-                                <span>{{ String.fromCharCode('B'.codePointAt(0) + groupIndex * 3 + columnIndex) }}</span>
+                                <span>{{ String.fromCharCode('A'.codePointAt(0) + column) }}</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>

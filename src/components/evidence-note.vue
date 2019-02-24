@@ -36,16 +36,12 @@
                     </v-flex>
                 </v-layout>
             </v-flex>
-            <v-flex
-                xs4
-                v-for="(group, groupIndex) in 2"
-                :key="`colgroup-${index}-${groupIndex}`"
-            >
+            <v-flex xs8>
                 <v-layout row>
                     <v-flex
-                        xs4
-                        v-for="(column, columnIndex) in 3"
-                        :key="`cell-${index}-${groupIndex}-${columnIndex}`"
+                        xs2
+                        v-for="column in 6"
+                        :key="`cell-${index}-${column}`"
                     >
                         <v-card tile>
                             <v-card-text class="pa-0 text-xs-center">
