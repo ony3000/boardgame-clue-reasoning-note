@@ -15,22 +15,23 @@
         </v-layout>
         <v-layout
             row
-            v-for="(item, index) in items"
-            :key="`row-${index}`"
+            v-for="item in items"
+            :key="item.key"
         >
             <v-flex xs4>
                 <v-layout row>
                     <v-flex xs8>
                         <v-card tile>
                             <v-card-text class="px-1 py-0 text-truncate">
-                                <span>{{ item }}</span>
+                                <span>{{ item.title }}</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
                         <v-card tile>
                             <v-card-text class="pa-0 text-xs-center">
-                                <span>&nbsp;</span>
+                                <span v-if="item.evidences[0]" class="mdi"></span>
+                                <span v-else>&nbsp;</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -41,11 +42,12 @@
                     <v-flex
                         xs2
                         v-for="column in 6"
-                        :key="`cell-${index}-${column}`"
+                        :key="`${item.key}-${column}`"
                     >
                         <v-card tile>
                             <v-card-text class="pa-0 text-xs-center">
-                                <span>&nbsp;</span>
+                                <span v-if="item.evidences[column]" class="mdi"></span>
+                                <span v-else>&nbsp;</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -59,8 +61,13 @@
 export default {
     name: 'evidence-note',
     props: {
+        type: String,
         title: String,
-        items: Array,
+    },
+    computed: {
+        items() {
+            return this.$store.getters[this.type];
+        },
     },
 };
 </script>

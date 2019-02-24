@@ -11,16 +11,16 @@
             <v-container fluid grid-list-xs>
                 <detective-list></detective-list>
                 <evidence-note
+                    type="characters"
                     :title="lang.who"
-                    :items="characters"
                 ></evidence-note>
                 <evidence-note
+                    type="weapons"
                     :title="lang.what"
-                    :items="weapons"
                 ></evidence-note>
                 <evidence-note
+                    type="rooms"
                     :title="lang.where"
-                    :items="rooms"
                 ></evidence-note>
             </v-container>
         </v-content>
@@ -43,41 +43,6 @@ export default {
         BrushDialog,
         DetectiveList,
         EvidenceNote,
-    },
-    computed: {
-        characters() {
-            return [
-                this.lang.green,
-                this.lang.mustard,
-                this.lang.peacock,
-                this.lang.plum,
-                this.lang.scarlet,
-                this.lang.white,
-            ];
-        },
-        weapons() {
-            return [
-                this.lang.wrench,
-                this.lang.candlestick,
-                this.lang.dagger,
-                this.lang.pistol,
-                this.lang.pipe,
-                this.lang.rope,
-            ];
-        },
-        rooms() {
-            return [
-                this.lang.bathroom,
-                this.lang.library,
-                this.lang.gameroom,
-                this.lang.garage,
-                this.lang.bedroom,
-                this.lang.livingroom,
-                this.lang.kitchen,
-                this.lang.courtyard,
-                this.lang.diningroom,
-            ];
-        },
     },
 };
 </script>
