@@ -91,6 +91,23 @@ const store = new Vuex.Store({
             state.brushType = payload.memoType;
             state.brushColor = payload.memoColor;
         },
+        writeMemo(state, payload) {
+            const { key, column } = payload;
+
+            state.evidences[key][column] = `${state.brushType}:${state.brushColor}`;
+            state.evidences[key] = [...state.evidences[key]];
+        },
+        eraseMemo(state, payload) {
+            const { key, column } = payload;
+
+            state.evidences[key][column] = null;
+            state.evidences[key] = [...state.evidences[key]];
+        },
+        eraseAllMemo(state) {
+            Object.keys(state.evidences).forEach((key) => {
+                state.evidences[key] = Array(7).fill(null);
+            });
+        },
     },
     actions: {
     },

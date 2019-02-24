@@ -15,7 +15,7 @@
         </v-layout>
         <v-layout
             row
-            v-for="item in items"
+            v-for="(item, index) in items"
             :key="item.key"
         >
             <v-flex xs4>
@@ -28,9 +28,13 @@
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
-                        <v-card tile>
+                        <v-card tile @click="editMemo(index, 0)">
                             <v-card-text class="pa-0 text-xs-center">
-                                <span v-if="item.evidences[0]" class="mdi"></span>
+                                <span
+                                    v-if="item.evidences[0]"
+                                    class="mdi"
+                                    :class="item.evidences[0] | memoClass(textColorClass)"
+                                ></span>
                                 <span v-else>&nbsp;</span>
                             </v-card-text>
                         </v-card>
@@ -44,9 +48,13 @@
                         v-for="column in 6"
                         :key="`${item.key}-${column}`"
                     >
-                        <v-card tile>
+                        <v-card tile @click="editMemo(index, column)">
                             <v-card-text class="pa-0 text-xs-center">
-                                <span v-if="item.evidences[column]" class="mdi"></span>
+                                <span
+                                    v-if="item.evidences[column]"
+                                    class="mdi"
+                                    :class="item.evidences[column] | memoClass(textColorClass)"
+                                ></span>
                                 <span v-else>&nbsp;</span>
                             </v-card-text>
                         </v-card>
@@ -58,6 +66,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'evidence-note',
     props: {
@@ -65,8 +75,38 @@ export default {
         title: String,
     },
     computed: {
+        ...mapState([
+            'brushType',
+        ]),
         items() {
             return this.$store.getters[this.type];
+        },
+    },
+    filters: {
+        memoClass(value, textColorClass) {
+            const matches = value.match(/^(.+):(.+)$/);
+
+            return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
+        },
+    },
+    methods: {
+        editMemo(index, column) {
+            const memo = this.items[index].evidences[column];
+            const params = {
+                key: this.items[index].key,
+                column,
+            };
+
+            if (this.brushType === 'eraser') {
+                if (memo) {
+                    this.$store.commit('eraseMemo', params);
+                }
+            }
+            else {
+                if (!memo || (!memo.startsWith('check') && !memo.startsWith('close'))) {
+                    this.$store.commit('writeMemo', params);
+                }
+            }
         },
     },
 };
