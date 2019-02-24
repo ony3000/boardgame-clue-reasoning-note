@@ -7,10 +7,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
+        brushType: 'check',
+        brushColor: 'black',
     },
     getters: {
     },
     mutations: {
+        saveBrushSetting(state, payload) {
+            state.brushType = payload.memoType;
+            state.brushColor = payload.memoColor;
+        },
     },
     actions: {
     },
