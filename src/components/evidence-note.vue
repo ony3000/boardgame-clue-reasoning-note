@@ -5,7 +5,7 @@
                 <v-layout row>
                     <v-flex xs8>
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="px-1 py-0 text-truncate font-weight-bold">
                                 <span>{{ title }}</span>
                             </v-card-text>
                         </v-card>
@@ -22,14 +22,14 @@
                 <v-layout row>
                     <v-flex xs8>
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="px-1 py-0 text-truncate">
                                 <span>{{ item }}</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="pa-0 text-xs-center">
                                 <span>&nbsp;</span>
                             </v-card-text>
                         </v-card>
@@ -48,7 +48,7 @@
                         :key="`cell-${index}-${groupIndex}-${columnIndex}`"
                     >
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="pa-0 text-xs-center">
                                 <span>&nbsp;</span>
                             </v-card-text>
                         </v-card>

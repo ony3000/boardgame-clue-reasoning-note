@@ -7,7 +7,7 @@
             <!-- <player-dialog></player-dialog> -->
             <brush-dialog></brush-dialog>
         </v-toolbar>
-        <v-content>
+        <v-content class="accent">
             <v-container fluid grid-list-xs>
                 <detective-list></detective-list>
                 <evidence-note

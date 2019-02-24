@@ -5,7 +5,7 @@
                 <v-layout row>
                     <v-flex xs4 offset-xs8>
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="pa-0 text-xs-center">
                                 <span>A</span>
                             </v-card-text>
                         </v-card>
@@ -24,7 +24,7 @@
                         :key="`cell-${groupIndex}-${columnIndex}`"
                     >
                         <v-card tile>
-                            <v-card-text class="pa-0">
+                            <v-card-text class="pa-0 text-xs-center">
                                 <span>{{ String.fromCharCode('B'.codePointAt(0) + groupIndex * 3 + columnIndex) }}</span>
                             </v-card-text>
                         </v-card>
