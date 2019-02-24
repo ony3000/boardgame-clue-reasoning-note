@@ -9,6 +9,7 @@
         </v-toolbar>
         <v-content>
             <v-container fluid grid-list-xs>
+                <detective-list></detective-list>
                 <evidence-note
                     :title="lang.who"
                     :items="characters"
@@ -31,6 +32,7 @@
 import NewgameDialog from '@/components/newgame-dialog';
 import PlayerDialog from '@/components/player-dialog';
 import BrushDialog from '@/components/brush-dialog';
+import DetectiveList from '@/components/detective-list';
 import EvidenceNote from '@/components/evidence-note';
 
 export default {
@@ -39,6 +41,7 @@ export default {
         NewgameDialog,
         PlayerDialog,
         BrushDialog,
+        DetectiveList,
         EvidenceNote,
     },
     computed: {
