@@ -1,39 +1,32 @@
 const path = require('path');
-const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const devMode = (process.env.NODE_ENV !== 'production');
+
 module.exports = {
-  mode: 'development',
-  devtool: 'eval-source-map',
-  devServer: {
-    compress: true,
-    contentBase: path.resolve(__dirname, 'src/static'),
-    hot: true,
-    overlay: true
-  },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          (devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader),
           'css-loader'
         ]
       },
       {
         test: /\.scss$/,
         use: [
-          'vue-style-loader',
+          (devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader),
           'css-loader',
-          'sass-loader',
+          'sass-loader'
         ]
       },
       {
         test: /\.sass$/,
         use: [
-          'vue-style-loader',
+          (devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader),
           'css-loader',
           {
             loader: 'sass-loader',
@@ -59,28 +52,41 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        use: (
+          devMode
+            ? ['file-loader']
+            : {
+              loader: 'url-loader',
+              options: {
+                limit: 2048,
+                name: 'images/[name].[hash:7].[ext]'
+              }
+            }
+        )
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
-      },
+        use: (
+          devMode
+            ? ['file-loader']
+            : {
+              loader: 'file-loader',
+              options: {
+                name: 'fonts/[name].[hash:7].[ext]'
+              }
+            }
+        )
+      }
     ]
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, '../src'),
       'vue$': 'vue/dist/vue.esm.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'src/templates/index.html'
     }),
