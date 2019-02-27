@@ -4,7 +4,7 @@
             <v-flex xs4>
                 <v-layout row>
                     <v-flex xs8>
-                        <v-card tile>
+                        <v-card tile :height="22">
                             <v-card-text class="px-1 py-0 text-truncate font-weight-bold">
                                 <span>{{ title }}</span>
                             </v-card-text>
@@ -21,14 +21,14 @@
             <v-flex xs4>
                 <v-layout row>
                     <v-flex xs8>
-                        <v-card tile>
+                        <v-card tile :height="22">
                             <v-card-text class="px-1 py-0 text-truncate">
                                 <span>{{ item.title }}</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
-                        <v-card tile @click="editMemo(index, 0)">
+                        <v-card tile :height="22" @click="editMemo(index, 0)">
                             <v-card-text class="pa-0 text-xs-center">
                                 <span
                                     v-if="item.evidences[0]"
@@ -48,7 +48,7 @@
                         v-for="column in 6"
                         :key="`${item.key}-${column}`"
                     >
-                        <v-card tile @click="editMemo(index, column)">
+                        <v-card tile :height="22" @click="editMemo(index, column)">
                             <v-card-text class="pa-0 text-xs-center">
                                 <span
                                     v-if="item.evidences[column]"
