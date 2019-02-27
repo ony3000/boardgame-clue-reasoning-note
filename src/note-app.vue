@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer app></v-navigation-drawer>
+        <!-- <v-navigation-drawer app></v-navigation-drawer> -->
         <v-toolbar app>
             <newgame-dialog></newgame-dialog>
             <v-spacer></v-spacer>
