@@ -24,7 +24,10 @@
                 ></evidence-note>
             </v-container>
         </v-content>
-        <v-footer app></v-footer>
+        <v-footer app class="pa-3">
+            <v-spacer></v-spacer>
+            <div>v1.0.0-beta.0</div>
+        </v-footer>
     </v-app>
 </template>
 
