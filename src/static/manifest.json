@@ -1,0 +1,36 @@
+{
+  "name": "CLUE: 추리 노트",
+  "short_name": "추리 노트",
+  "icons": [
+    {
+      "src": "/icons/sherlock-holmes-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/sherlock-holmes-144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/sherlock-holmes-152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/sherlock-holmes-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/sherlock-holmes-256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#82b1ff",
+  "theme_color": "#82b1ff"
+}
