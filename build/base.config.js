@@ -88,7 +88,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'src/templates/index.html'
+      template: 'src/templates/index.html',
+      templateParameters: {
+        NODE_ENV: process.env.NODE_ENV
+      }
     }),
     new VueLoaderPlugin()
   ]

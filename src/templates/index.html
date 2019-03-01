@@ -4,6 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
     <title>CLUE: 추리 노트</title>
+    <% if (NODE_ENV === 'production') { %>
+    <base href="http://clue.wellmade.club/">
+    <% } %>
+    <meta name="application-name" content="추리 노트">
+    <meta name="theme-color" content="#82b1ff">
+    <meta name="description" content="보드게임 클루에 들어있는 추리 노트가 소진되었을 때를 대비한 single-page application">
+    <meta name="google" content="notranslate">
+    <meta name="subject" content="CLUE: 추리 노트">
 </head>
 <body>
     <div id="app"></div>
