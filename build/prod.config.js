@@ -2,6 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
@@ -28,6 +29,10 @@ const prodConfig = merge(baseConfig, {
         to: path.resolve(__dirname, '../dist')
       }
     ]),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css',
       chunkFilename: '[name].[contenthash:7].css'
