@@ -29,10 +29,6 @@ const prodConfig = merge(baseConfig, {
         to: path.resolve(__dirname, '../dist')
       }
     ]),
-    new WorkboxPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true
-    }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css',
       chunkFilename: '[name].[contenthash:7].css'
