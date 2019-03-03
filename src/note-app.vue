@@ -26,7 +26,7 @@
         </v-content>
         <v-footer app class="pa-3">
             <v-spacer></v-spacer>
-            <div>v1.0.0-beta.0</div>
+            <div>v1.0.0-beta.1</div>
         </v-footer>
     </v-app>
 </template>

@@ -1,6 +1,7 @@
 {
   "name": "CLUE: 추리 노트",
   "short_name": "추리 노트",
+  "version": "1.0.0-beta.1",
   "icons": [
     {
       "src": "/icons/sherlock-holmes-128.png",
