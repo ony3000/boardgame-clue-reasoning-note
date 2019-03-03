@@ -69,6 +69,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import storage from '@/middleware/web-storage';
 
 export default {
     name: 'brush-dialog',
@@ -84,6 +85,14 @@ export default {
             'brushType',
             'brushColor',
         ]),
+    },
+    mounted() {
+        this.$nextTick(() => {
+            if (storage) {
+                this.memoType = (storage.getItem('brushType') || this.memoType);
+                this.memoColor = (storage.getItem('brushColor') || this.memoColor);
+            }
+        });
     },
     methods: {
         closeAction() {

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import storage from '@/middleware/web-storage';
 import languageModule from '@/store/language';
 import paletteModule from '@/store/palette';
 
@@ -90,26 +91,57 @@ const store = new Vuex.Store({
         saveBrushSetting(state, payload) {
             state.brushType = payload.memoType;
             state.brushColor = payload.memoColor;
+            if (storage) {
+                storage.setItem('brushType', payload.memoType);
+                storage.setItem('brushColor', payload.memoColor);
+            }
         },
         writeMemo(state, payload) {
             const { key, column } = payload;
 
             state.evidences[key][column] = `${state.brushType}:${state.brushColor}`;
             state.evidences[key] = [...state.evidences[key]];
+            if (storage) {
+                storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
+            }
         },
         eraseMemo(state, payload) {
             const { key, column } = payload;
 
             state.evidences[key][column] = null;
             state.evidences[key] = [...state.evidences[key]];
+            if (storage) {
+                storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
+            }
         },
         eraseAllMemo(state) {
             Object.keys(state.evidences).forEach((key) => {
                 state.evidences[key] = Array(7).fill(null);
+                if (storage) {
+                    storage.setItem(`evidences:${key}`, JSON.stringify(Array(7).fill(null)));
+                }
             });
         },
     },
     actions: {
+        setup({ state }) {
+            if (storage) {
+                state.brushType = (storage.getItem('brushType') || state.brushType);
+                state.brushColor = (storage.getItem('brushColor') || state.brushColor);
+
+                Object.keys(state.evidences).forEach((key) => {
+                    let evidences = (storage.getItem(`evidences:${key}`) || JSON.stringify(Array(7).fill(null)));
+
+                    try {
+                        evidences = JSON.parse(evidences);
+                    }
+                    catch (err) {
+                        evidences = Array(7).fill(null);
+                    }
+                    state.evidences[key] = evidences;
+                });
+            }
+        },
     },
     modules: {
         language: languageModule,

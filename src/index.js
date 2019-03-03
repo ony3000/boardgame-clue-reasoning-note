@@ -38,4 +38,9 @@ new Vue({
     render(h) {
         return h(NoteApp);
     },
+    mounted() {
+        this.$nextTick(() => {
+            this.$store.dispatch('setup');
+        });
+    },
 });
