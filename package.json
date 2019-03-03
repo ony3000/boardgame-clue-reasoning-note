@@ -3,7 +3,7 @@
   "version": "1.0.0-beta.0",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config build/dev.config.js",
-    "prebuild": "cross-env NODE_ENV=testing webpack --progress --hide-modules --config build/prod.config.js",
+    "testing": "cross-env NODE_ENV=testing webpack --progress --hide-modules --config build/prod.config.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config build/prod.config.js"
   },
   "repository": "https://github.com/ony3000/boardgame-clue-reasoning-note.git",
