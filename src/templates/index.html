@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3">
     <title>CLUE: 추리 노트</title>
     <% if (NODE_ENV === 'production') { %>
-    <base href="http://clue.wellmade.club/">
+    <base href="https://clue.wellmade.club/">
+    <% } else if (NODE_ENV === 'testing') { %>
+    <base href="https://clue.ekswaizi.xyz/">
     <% } %>
     <meta name="application-name" content="추리 노트">
     <meta name="theme-color" content="#82b1ff">
