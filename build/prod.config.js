@@ -1,6 +1,5 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -14,19 +13,16 @@ const prodConfig = merge(baseConfig, {
     app: './src/index.js'
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist_temp'),
     publicPath: '/',
     filename: '[name].[chunkhash:7].js',
     chunkFilename: '[name].[chunkhash:7].js'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '..')
-    }),
     new CopyWebpackPlugin([
       {
         from: 'src/static',
-        to: path.resolve(__dirname, '../dist')
+        to: path.resolve(__dirname, '../dist_temp')
       }
     ]),
     new MiniCssExtractPlugin({
