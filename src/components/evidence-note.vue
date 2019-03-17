@@ -28,7 +28,12 @@
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
-                        <v-card tile :height="22" @click="editMemo(index, 0)">
+                        <v-card
+                            tile
+                            :class="{'is-last-edited': lastEditedItem.key === item.key && lastEditedItem.column === 0}"
+                            :height="22"
+                            @click="editMemo(index, 0)"
+                        >
                             <v-card-text class="pa-0 text-xs-center">
                                 <span
                                     v-if="item.evidences[0]"
@@ -48,7 +53,12 @@
                         v-for="column in 6"
                         :key="`${item.key}-${column}`"
                     >
-                        <v-card tile :height="22" @click="editMemo(index, column)">
+                        <v-card
+                            tile
+                            :class="{'is-last-edited': lastEditedItem.key === item.key && lastEditedItem.column === column}"
+                            :height="22"
+                            @click="editMemo(index, column)"
+                        >
                             <v-card-text class="pa-0 text-xs-center">
                                 <span
                                     v-if="item.evidences[column]"
@@ -80,6 +90,9 @@ export default {
         ]),
         items() {
             return this.$store.getters[this.type];
+        },
+        lastEditedItem() {
+            return this.$store.getters.lastEdited;
         },
     },
     filters: {

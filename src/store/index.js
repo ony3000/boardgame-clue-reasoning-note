@@ -87,6 +87,9 @@ const store = new Vuex.Store({
                 };
             });
         },
+        lastEdited(state) {
+            return (state.histories.slice(-1)[0] || {});
+        },
     },
     mutations: {
         saveBrushSetting(state, payload) {
