@@ -92,8 +92,8 @@ const store = new Vuex.Store({
             state.brushType = payload.memoType;
             state.brushColor = payload.memoColor;
             if (storage) {
-                storage.setItem('brushType', payload.memoType);
-                storage.setItem('brushColor', payload.memoColor);
+                storage.setItem('brushType', state.brushType);
+                storage.setItem('brushColor', state.brushColor);
             }
         },
         writeMemo(state, payload) {
@@ -118,7 +118,7 @@ const store = new Vuex.Store({
             Object.keys(state.evidences).forEach((key) => {
                 state.evidences[key] = Array(7).fill(null);
                 if (storage) {
-                    storage.setItem(`evidences:${key}`, JSON.stringify(Array(7).fill(null)));
+                    storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
                 }
             });
         },
