@@ -91,12 +91,13 @@ export default {
     },
     methods: {
         editMemo(index, column) {
-            const memo = this.items[index].evidences[column];
             const params = {
                 key: this.items[index].key,
                 column,
+                oldMemo: this.items[index].evidences[column],
             };
 
+            this.$store.commit('writeHistory', params);
             if (this.brushType === 'eraser') {
                 this.$store.commit('eraseMemo', params);
             }

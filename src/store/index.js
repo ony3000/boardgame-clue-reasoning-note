@@ -33,6 +33,7 @@ const store = new Vuex.Store({
             courtyard: Array(7).fill(null),
             diningroom: Array(7).fill(null),
         },
+        histories: [],
     },
     getters: {
         characters(state) {
@@ -122,10 +123,37 @@ const store = new Vuex.Store({
                 }
             });
         },
+        writeHistory(state, payload) {
+            const history = {
+                ...payload,
+                newMemo: (state.brushType === 'eraser' ? null : `${state.brushType}:${state.brushColor}`),
+            };
+
+            state.histories.push(history);
+            if (storage) {
+                storage.setItem('histories', JSON.stringify(state.histories));
+            }
+        },
+        eraseAllHistory(state) {
+            state.histories = [];
+            if (storage) {
+                storage.setItem('histories', JSON.stringify(state.histories));
+            }
+        },
     },
     actions: {
         setup({ state }) {
             if (storage) {
+                let histories = (storage.getItem('histories') || JSON.stringify([]));
+
+                try {
+                    histories = JSON.parse(histories);
+                }
+                catch (err) {
+                    histories = [];
+                }
+                state.histories = histories;
+
                 state.brushType = (storage.getItem('brushType') || state.brushType);
                 state.brushColor = (storage.getItem('brushColor') || state.brushColor);
 

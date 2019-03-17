@@ -28,6 +28,7 @@ export default {
             this.isActive = false;
         },
         saveAction() {
+            this.$store.commit('eraseAllHistory');
             this.$store.commit('eraseAllMemo');
             this.isActive = false;
         },
