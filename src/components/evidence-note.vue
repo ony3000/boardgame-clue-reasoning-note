@@ -98,14 +98,10 @@ export default {
             };
 
             if (this.brushType === 'eraser') {
-                if (memo) {
-                    this.$store.commit('eraseMemo', params);
-                }
+                this.$store.commit('eraseMemo', params);
             }
             else {
-                if (!memo || (!memo.startsWith('check') && !memo.startsWith('close'))) {
-                    this.$store.commit('writeMemo', params);
-                }
+                this.$store.commit('writeMemo', params);
             }
         },
     },
