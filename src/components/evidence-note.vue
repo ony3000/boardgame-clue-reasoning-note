@@ -15,7 +15,7 @@
         </v-layout>
         <v-layout
             row
-            v-for="(item, index) in items"
+            v-for="item in items"
             :key="item.key"
         >
             <v-flex xs4>
@@ -28,21 +28,10 @@
                         </v-card>
                     </v-flex>
                     <v-flex xs4>
-                        <v-card
-                            tile
-                            :class="{'is-last-edited': lastEditedItem.key === item.key && lastEditedItem.column === 0}"
-                            :height="22"
-                            @click="editMemo(index, 0)"
-                        >
-                            <v-card-text class="pa-0 text-xs-center">
-                                <span
-                                    v-if="item.evidences[0]"
-                                    class="mdi"
-                                    :class="item.evidences[0] | memoClass(textColorClass)"
-                                ></span>
-                                <span v-else>&nbsp;</span>
-                            </v-card-text>
-                        </v-card>
+                        <evidence-note-space
+                            :item="item.key"
+                            :column="0"
+                        ></evidence-note-space>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -53,21 +42,10 @@
                         v-for="column in 6"
                         :key="`${item.key}-${column}`"
                     >
-                        <v-card
-                            tile
-                            :class="{'is-last-edited': lastEditedItem.key === item.key && lastEditedItem.column === column}"
-                            :height="22"
-                            @click="editMemo(index, column)"
-                        >
-                            <v-card-text class="pa-0 text-xs-center">
-                                <span
-                                    v-if="item.evidences[column]"
-                                    class="mdi"
-                                    :class="item.evidences[column] | memoClass(textColorClass)"
-                                ></span>
-                                <span v-else>&nbsp;</span>
-                            </v-card-text>
-                        </v-card>
+                        <evidence-note-space
+                            :item="item.key"
+                            :column="column"
+                        ></evidence-note-space>
                     </v-flex>
                 </v-layout>
             </v-flex>
@@ -76,7 +54,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import EvidenceNoteSpace from '@/components/evidence-note-space';
 
 export default {
     name: 'evidence-note',
@@ -84,39 +62,12 @@ export default {
         type: String,
         title: String,
     },
+    components: {
+        EvidenceNoteSpace,
+    },
     computed: {
-        ...mapState([
-            'brushType',
-        ]),
         items() {
             return this.$store.getters[this.type];
-        },
-        lastEditedItem() {
-            return this.$store.getters.lastEdited;
-        },
-    },
-    filters: {
-        memoClass(value, textColorClass) {
-            const matches = value.match(/^(.+):(.+)$/);
-
-            return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
-        },
-    },
-    methods: {
-        editMemo(index, column) {
-            const params = {
-                key: this.items[index].key,
-                column,
-                oldMemo: this.items[index].evidences[column],
-            };
-
-            this.$store.commit('writeHistory', params);
-            if (this.brushType === 'eraser') {
-                this.$store.commit('eraseMemo', params);
-            }
-            else {
-                this.$store.commit('writeMemo', params);
-            }
         },
     },
 };
