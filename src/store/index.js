@@ -8,8 +8,6 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        brushType: 'check',
-        brushColor: 'black',
         evidences: {
             green: Array(7).fill(null),
             mustard: Array(7).fill(null),
@@ -93,32 +91,6 @@ const store = new Vuex.Store({
         },
     },
     mutations: {
-        saveBrushSetting(state, payload) {
-            state.brushType = payload.memoType;
-            state.brushColor = payload.memoColor;
-            if (storage) {
-                storage.setItem('brushType', state.brushType);
-                storage.setItem('brushColor', state.brushColor);
-            }
-        },
-        writeMemo(state, payload) {
-            const { key, column } = payload;
-
-            state.evidences[key][column] = `${state.brushType}:${state.brushColor}`;
-            state.evidences[key] = [...state.evidences[key]];
-            if (storage) {
-                storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
-            }
-        },
-        eraseMemo(state, payload) {
-            const { key, column } = payload;
-
-            state.evidences[key][column] = null;
-            state.evidences[key] = [...state.evidences[key]];
-            if (storage) {
-                storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
-            }
-        },
         editMemo(state, payload) {
             const { key, column, newMemo } = payload;
 
@@ -173,9 +145,6 @@ const store = new Vuex.Store({
                     histories = [];
                 }
                 state.histories = histories;
-
-                state.brushType = (storage.getItem('brushType') || state.brushType);
-                state.brushColor = (storage.getItem('brushColor') || state.brushColor);
 
                 Object.keys(state.evidences).forEach((key) => {
                     let evidences = (storage.getItem(`evidences:${key}`) || JSON.stringify(Array(7).fill(null)));
