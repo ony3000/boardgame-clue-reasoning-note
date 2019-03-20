@@ -1,16 +1,12 @@
 <template>
     <div class="mb-2">
         <v-layout row>
-            <v-flex xs4>
-                <v-layout row>
-                    <v-flex xs8>
-                        <v-card tile :height="22">
-                            <v-card-text class="px-1 py-0 text-truncate font-weight-bold">
-                                <span>{{ title }}</span>
-                            </v-card-text>
-                        </v-card>
-                    </v-flex>
-                </v-layout>
+            <v-flex xs3>
+                <v-card tile :height="22">
+                    <v-card-text class="px-1 py-0 text-truncate font-weight-bold">
+                        <span>{{ title }}</span>
+                    </v-card-text>
+                </v-card>
             </v-flex>
         </v-layout>
         <v-layout
@@ -18,33 +14,23 @@
             v-for="item in items"
             :key="item.key"
         >
-            <v-flex xs4>
-                <v-layout row>
-                    <v-flex xs8>
-                        <v-card tile :height="22">
-                            <v-card-text class="px-1 py-0 text-truncate">
-                                <span>{{ item.title }}</span>
-                            </v-card-text>
-                        </v-card>
-                    </v-flex>
-                    <v-flex xs4>
-                        <evidence-note-space
-                            :item="item.key"
-                            :column="0"
-                        ></evidence-note-space>
-                    </v-flex>
-                </v-layout>
+            <v-flex xs3>
+                <v-card tile :height="22">
+                    <v-card-text class="px-1 py-0 text-truncate">
+                        <span>{{ item.title }}</span>
+                    </v-card-text>
+                </v-card>
             </v-flex>
-            <v-flex xs8>
+            <v-flex>
                 <v-layout row>
                     <v-flex
-                        xs2
-                        v-for="column in 6"
-                        :key="`${item.key}-${column}`"
+                        v-for="(num, index) in 7"
+                        :key="`${item.key}-${index}`"
+                        class="is-evenly-spaced"
                     >
                         <evidence-note-space
                             :item="item.key"
-                            :column="column"
+                            :column="index"
                         ></evidence-note-space>
                     </v-flex>
                 </v-layout>
