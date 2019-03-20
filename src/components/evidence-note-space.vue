@@ -3,6 +3,7 @@
         tile
         :class="{'is-last-edited': isLastEdited}"
         :height="22"
+        @click="openMemoDialog"
     >
         <v-card-text class="pa-0 text-xs-center">
             <span
@@ -45,6 +46,15 @@ export default {
             const matches = value.match(/^(.+):(.+)$/);
 
             return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
+        },
+    },
+    methods: {
+        openMemoDialog() {
+            const params = {
+                item: this.item,
+                column: this.column,
+            };
+            this.$store.commit('focusSpace', params);
         },
     },
 };

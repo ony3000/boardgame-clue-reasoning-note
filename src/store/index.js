@@ -34,6 +34,7 @@ const store = new Vuex.Store({
             diningroom: Array(7).fill(null),
         },
         histories: [],
+        focusedSpace: null,
     },
     getters: {
         characters(state) {
@@ -118,6 +119,15 @@ const store = new Vuex.Store({
                 storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
             }
         },
+        editMemo(state, payload) {
+            const { key, column, newMemo } = payload;
+
+            state.evidences[key][column] = newMemo;
+            state.evidences[key] = [...state.evidences[key]];
+            if (storage) {
+                storage.setItem(`evidences:${key}`, JSON.stringify(state.evidences[key]));
+            }
+        },
         eraseAllMemo(state) {
             Object.keys(state.evidences).forEach((key) => {
                 state.evidences[key] = Array(7).fill(null);
@@ -127,9 +137,10 @@ const store = new Vuex.Store({
             });
         },
         writeHistory(state, payload) {
+            const { key, column } = payload;
             const history = {
                 ...payload,
-                newMemo: (state.brushType === 'eraser' ? null : `${state.brushType}:${state.brushColor}`),
+                oldMemo: state.evidences[key][column],
             };
 
             state.histories.push(history);
@@ -142,6 +153,12 @@ const store = new Vuex.Store({
             if (storage) {
                 storage.setItem('histories', JSON.stringify(state.histories));
             }
+        },
+        focusSpace(state, payload) {
+            state.focusedSpace = payload;
+        },
+        clearFocus(state) {
+            state.focusedSpace = null;
         },
     },
     actions: {
@@ -172,6 +189,10 @@ const store = new Vuex.Store({
                     state.evidences[key] = evidences;
                 });
             }
+        },
+        editMemo({ commit }, payload) {
+            commit('writeHistory', payload);
+            commit('editMemo', payload);
         },
     },
     modules: {

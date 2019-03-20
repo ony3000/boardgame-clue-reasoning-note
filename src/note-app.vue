@@ -6,6 +6,7 @@
             <brush-dialog></brush-dialog>
         </v-toolbar>
         <v-content class="accent">
+            <memo-dialog></memo-dialog>
             <v-container fluid grid-list-xs>
                 <detective-list></detective-list>
                 <evidence-note
@@ -32,6 +33,7 @@
 <script>
 import NewgameDialog from '@/components/newgame-dialog';
 import BrushDialog from '@/components/brush-dialog';
+import MemoDialog from '@/components/memo-dialog';
 import DetectiveList from '@/components/detective-list';
 import EvidenceNote from '@/components/evidence-note';
 
@@ -40,6 +42,7 @@ export default {
     components: {
         NewgameDialog,
         BrushDialog,
+        MemoDialog,
         DetectiveList,
         EvidenceNote,
     },
