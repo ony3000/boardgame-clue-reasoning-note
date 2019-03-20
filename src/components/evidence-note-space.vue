@@ -1,7 +1,7 @@
 <template>
     <v-card
         tile
-        :class="{'is-last-edited': isLastEdited}"
+        :class="{'has-outline': isLastEdited}"
         :height="22"
         @click="openMemoDialog"
     >

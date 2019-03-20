@@ -46,7 +46,7 @@
                         <v-flex v-for="color in memoColors" :key="color">
                             <v-card
                                 tile
-                                :class="{'is-last-edited': selectedMemo === `${type}:${color}`}"
+                                :class="{'has-outline': selectedMemo === `${type}:${color}`}"
                                 :height="22"
                                 @click="selectMemo(type, color)"
                             >
@@ -63,7 +63,7 @@
                         <v-flex xs6 offset-xs3>
                             <v-card
                                 tile
-                                :class="{'is-last-edited': selectedMemo === 'eraser'}"
+                                :class="{'has-outline': selectedMemo === 'eraser'}"
                                 :height="22"
                                 @click="selectMemo('eraser')"
                             >
