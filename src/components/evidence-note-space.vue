@@ -41,13 +41,6 @@ export default {
             );
         },
     },
-    filters: {
-        memoClass(value, textColorClass) {
-            const matches = value.match(/^(.+):(.+)$/);
-
-            return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
-        },
-    },
     methods: {
         openMemoDialog() {
             const params = {

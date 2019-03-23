@@ -11,6 +11,12 @@ Vue.use(Vuetify, {
     iconfont: 'mdi',
 });
 
+Vue.filter('memoClass', (value, textColorClass) => {
+    const matches = value.match(/^(.+):(.+)$/);
+
+    return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
+});
+
 Vue.mixin({
     computed: {
         ...mapState({

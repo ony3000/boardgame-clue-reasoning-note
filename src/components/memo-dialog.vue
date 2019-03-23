@@ -126,13 +126,6 @@ export default {
             return (this.focusedSpace !== null);
         },
     },
-    filters: {
-        memoClass(value, textColorClass) {
-            const matches = value.match(/^(.+):(.+)$/);
-
-            return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
-        },
-    },
     methods: {
         selectMemo(...args) {
             this.selectedMemo = args.join(':');
