@@ -24,18 +24,18 @@
                         <v-flex xs2>
                             <v-card tile :height="22">
                                 <v-card-text class="pa-0 text-xs-center">
-                                    <span
+                                    <v-icon
                                         v-if="memoContent"
-                                        class="mdi"
-                                        :class="memoContent | memoClass(textColorClass)"
-                                    ></span>
+                                        small
+                                        :color="memoContent | memoColor(colorClass)"
+                                    >{{ memoContent | memoIcon }}</v-icon>
                                     <span v-else>&nbsp;</span>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
                         <v-flex>
                             <span>&nbsp;</span>
-                            <span class="mdi mdi-arrow-left"></span>
+                            <v-icon small color="grey darken-4">mdi-arrow-left</v-icon>
                             <span>현재 메모</span>
                         </v-flex>
                     </v-layout>
@@ -51,10 +51,10 @@
                                 @click="selectMemo(type, color)"
                             >
                                 <v-card-text class="pa-0 text-xs-center">
-                                    <span
-                                        class="mdi"
-                                        :class="[`mdi-${type}`, textColorClass[color]]"
-                                    ></span>
+                                    <v-icon
+                                        small
+                                        :color="colorClass[color]"
+                                    >{{ `mdi-${type}` }}</v-icon>
                                 </v-card-text>
                             </v-card>
                         </v-flex>
@@ -68,7 +68,7 @@
                                 @click="selectMemo('eraser')"
                             >
                                 <v-card-text class="pa-0 text-xs-center">
-                                    <span class="mdi mdi-eraser"></span>
+                                    <v-icon small color="grey darken-4">mdi-eraser</v-icon>
                                     <span>메모 삭제</span>
                                 </v-card-text>
                             </v-card>

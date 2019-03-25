@@ -22,6 +22,23 @@ Vue.filter('memoClass', (value, textColorClass) => {
     return `mdi-${translatedClass} ${textColorClass[matches[2]]}`;
 });
 
+Vue.filter('memoIcon', (value) => {
+    const matches = value.match(/^(.+):(.+)$/);
+    const translator = {
+        check: 'circle-outline',
+    };
+    const rawClass = matches[1];
+    const translatedClass = (translator[rawClass] ? translator[rawClass] : rawClass);
+
+    return `mdi-${translatedClass}`;
+});
+
+Vue.filter('memoColor', (value, colorClass) => {
+    const matches = value.match(/^(.+):(.+)$/);
+
+    return colorClass[matches[2]];
+});
+
 Vue.mixin({
     computed: {
         ...mapState({

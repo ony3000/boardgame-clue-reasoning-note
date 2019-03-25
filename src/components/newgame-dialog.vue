@@ -1,7 +1,7 @@
 <template>
     <v-dialog v-model="isActive" persistent>
         <v-btn slot="activator" icon>
-            <span class="mdi mdi-file-outline mdi-24px"></span>
+            <v-icon>mdi-file-outline</v-icon>
         </v-btn>
         <v-card>
             <v-card-title class="headline">새 게임</v-card-title>

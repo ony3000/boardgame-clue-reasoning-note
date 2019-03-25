@@ -6,11 +6,11 @@
         @click="openMemoDialog"
     >
         <v-card-text class="pa-0 text-xs-center">
-            <span
+            <v-icon
                 v-if="memoContent"
-                class="mdi"
-                :class="memoContent | memoClass(textColorClass)"
-            ></span>
+                small
+                :color="memoContent | memoColor(colorClass)"
+            >{{ memoContent | memoIcon }}</v-icon>
             <span v-else>&nbsp;</span>
         </v-card-text>
     </v-card>
