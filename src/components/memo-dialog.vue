@@ -93,7 +93,7 @@ export default {
     data() {
         return {
             memoTypes: [
-                'check',
+                'circle-outline',
                 'close',
                 'help',
             ],

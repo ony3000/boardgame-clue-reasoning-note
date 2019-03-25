@@ -13,8 +13,13 @@ Vue.use(Vuetify, {
 
 Vue.filter('memoClass', (value, textColorClass) => {
     const matches = value.match(/^(.+):(.+)$/);
+    const translator = {
+        check: 'circle-outline',
+    };
+    const rawClass = matches[1];
+    const translatedClass = (translator[rawClass] ? translator[rawClass] : rawClass);
 
-    return `mdi-${matches[1]} ${textColorClass[matches[2]]}`;
+    return `mdi-${translatedClass} ${textColorClass[matches[2]]}`;
 });
 
 Vue.mixin({
