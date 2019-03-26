@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="isActive" persistent>
+    <v-dialog v-model="isActive" persistent max-width="350">
         <v-btn slot="activator" icon>
             <v-icon>mdi-file-outline</v-icon>
         </v-btn>

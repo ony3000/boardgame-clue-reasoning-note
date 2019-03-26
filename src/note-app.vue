@@ -5,7 +5,7 @@
         </v-toolbar>
         <v-content class="accent">
             <memo-dialog></memo-dialog>
-            <v-container fluid grid-list-xs>
+            <v-container grid-list-xs>
                 <detective-list></detective-list>
                 <evidence-note
                     type="characters"

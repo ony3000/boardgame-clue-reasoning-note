@@ -1,5 +1,5 @@
 <template>
-    <v-dialog v-model="isActive" persistent>
+    <v-dialog v-model="isActive" persistent max-width="350">
         <v-card>
             <v-card-title class="headline">노트 편집</v-card-title>
             <v-card-text>
