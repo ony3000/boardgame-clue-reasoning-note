@@ -46,7 +46,7 @@ Vue.mixin({
     },
 });
 
-new Vue({
+const vm = new Vue({
     el: '#app',
     store,
     components: {
@@ -78,6 +78,7 @@ if ('serviceWorker' in navigator) {
                     installingWorker.addEventListener('statechange', (event) => {
                         if (event.target.state === 'activated') {
                             console.log('A new version of application is available.');
+                            vm.$store.commit('showUpdateNotification');
                         }
                     });
                 });
