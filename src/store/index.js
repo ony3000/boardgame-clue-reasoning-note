@@ -33,6 +33,7 @@ const store = new Vuex.Store({
         },
         histories: [],
         focusedSpace: null,
+        updateNotification: false,
     },
     getters: {
         characters(state) {
@@ -131,6 +132,12 @@ const store = new Vuex.Store({
         },
         clearFocus(state) {
             state.focusedSpace = null;
+        },
+        showUpdateNotification(state) {
+            state.updateNotification = true;
+        },
+        closeUpdateNotification(state) {
+            state.updateNotification = false;
         },
     },
     actions: {

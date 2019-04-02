@@ -1,5 +1,9 @@
 <template>
     <v-app>
+        <v-snackbar v-model="updateNotification" top multi-line :timeout="5000">
+            <span>새로운 버전을 사용할 수 있습니다.</span>
+            <v-btn color="accent" @click="reloadApp">업데이트</v-btn>
+        </v-snackbar>
         <v-toolbar app>
             <newgame-dialog></newgame-dialog>
         </v-toolbar>
@@ -41,6 +45,23 @@ export default {
         MemoDialog,
         DetectiveList,
         EvidenceNote,
+    },
+    computed: {
+        updateNotification: {
+            get() {
+                return this.$store.state.updateNotification;
+            },
+            set(newValue) {
+                if (!newValue) {
+                    this.$store.commit('closeUpdateNotification');
+                }
+            },
+        },
+    },
+    methods: {
+        reloadApp() {
+            location.reload();
+        },
     },
 };
 </script>

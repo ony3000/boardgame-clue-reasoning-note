@@ -46,7 +46,7 @@ Vue.mixin({
     },
 });
 
-new Vue({
+const vm = new Vue({
     el: '#app',
     store,
     components: {
@@ -61,3 +61,33 @@ new Vue({
         });
     },
 });
+
+if ('serviceWorker' in navigator && !['localhost', '127.0.0.1'].includes(location.hostname)) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('Service worker registered: ', registration);
+                registration.addEventListener('updatefound', () => {
+                    // If updatefound is fired, it means that there's
+                    // a new service worker being installed.
+                    const installingWorker = registration.installing;
+                    console.log('A new service worker is being installed: ', installingWorker);
+
+                    // You can listen for changes to the installing service worker's
+                    // state via installingWorker.onstatechange
+                    installingWorker.addEventListener('statechange', (event) => {
+                        if (event.target.state === 'activated') {
+                            console.log('A new version of application is available.');
+                            vm.$store.commit('showUpdateNotification');
+                        }
+                    });
+                });
+            })
+            .catch((error) => {
+                console.log('Service worker registration failed: ', error);
+            });
+    });
+}
+else {
+    console.log('Service workers are not supported.');
+}
