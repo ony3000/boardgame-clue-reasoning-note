@@ -6,6 +6,8 @@
         </v-snackbar>
         <v-toolbar app>
             <newgame-dialog></newgame-dialog>
+            <v-spacer></v-spacer>
+            <!-- <player-dialog></player-dialog> -->
         </v-toolbar>
         <v-content class="accent">
             <memo-dialog></memo-dialog>
@@ -34,6 +36,7 @@
 
 <script>
 import NewgameDialog from '@/components/newgame-dialog';
+// import PlayerDialog from '@/components/player-dialog';
 import MemoDialog from '@/components/memo-dialog';
 import DetectiveList from '@/components/detective-list';
 import EvidenceNote from '@/components/evidence-note';
@@ -42,6 +45,7 @@ export default {
     name: 'note-app',
     components: {
         NewgameDialog,
+        // PlayerDialog,
         MemoDialog,
         DetectiveList,
         EvidenceNote,
