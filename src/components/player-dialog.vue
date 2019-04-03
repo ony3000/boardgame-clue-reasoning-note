@@ -1,7 +1,7 @@
 <template>
-    <v-dialog v-model="isActive" persistent>
+    <v-dialog v-model="isActive" persistent max-width="350">
         <v-btn slot="activator" icon>
-            <span class="mdi mdi-account mdi-24px"></span>
+            <v-icon>mdi-account-multiple</v-icon>
         </v-btn>
         <v-card>
             <v-card-title class="headline">참가자 설정</v-card-title>
@@ -10,7 +10,11 @@
                 <v-container grid-list-xs>
                     <v-layout wrap>
                         <v-flex xs6 v-for="(num, index) in 6" :key="index">
-                            <v-text-field></v-text-field>
+                            <v-text-field
+                                solo
+                                :label="String.fromCharCode('A'.codePointAt(0) + index)"
+                                clearable
+                            ></v-text-field>
                         </v-flex>
                     </v-layout>
                 </v-container>
