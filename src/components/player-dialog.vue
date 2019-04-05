@@ -11,6 +11,7 @@
                     <v-layout wrap>
                         <v-flex xs6 v-for="(num, index) in 6" :key="index">
                             <v-text-field
+                                v-model="players[index]"
                                 solo
                                 :label="String.fromCharCode('A'.codePointAt(0) + index)"
                                 clearable
@@ -29,18 +30,48 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import storage from '@/middleware/web-storage';
+
 export default {
     name: 'player-dialog',
     data() {
         return {
             isActive: false,
+            players: Array(6).fill(''),
         };
+    },
+    computed: {
+        ...mapState([
+            'usernames',
+        ]),
+    },
+    mounted() {
+        this.$nextTick(() => {
+            if (storage) {
+                let usernames = (storage.getItem('usernames') || JSON.stringify(Array(6).fill('')));
+
+                try {
+                    usernames = JSON.parse(usernames);
+                }
+                catch (err) {
+                    usernames = Array(6).fill('');
+                }
+                usernames.forEach((value, index) => {
+                    this.players[index] = value;
+                });
+            }
+        });
     },
     methods: {
         closeAction() {
+            this.usernames.forEach((value, index) => {
+                this.players[index] = value;
+            });
             this.isActive = false;
         },
         saveAction() {
+            this.$store.commit('savePlayerSetting', this.players);
             this.isActive = false;
         },
     },

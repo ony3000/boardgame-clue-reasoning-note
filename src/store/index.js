@@ -32,6 +32,7 @@ const store = new Vuex.Store({
             diningroom: Array(7).fill(null),
         },
         histories: [],
+        usernames: Array(6).fill(''),
         focusedSpace: null,
         updateNotification: false,
     },
@@ -92,6 +93,12 @@ const store = new Vuex.Store({
         },
     },
     mutations: {
+        savePlayerSetting(state, payload) {
+            state.usernames = payload.slice();
+            if (storage) {
+                storage.setItem('usernames', JSON.stringify(state.usernames));
+            }
+        },
         editMemo(state, payload) {
             const { key, column, newMemo } = payload;
 
@@ -152,6 +159,16 @@ const store = new Vuex.Store({
                     histories = [];
                 }
                 state.histories = histories;
+
+                let usernames = (storage.getItem('usernames') || JSON.stringify(Array(6).fill('')));
+
+                try {
+                    usernames = JSON.parse(usernames);
+                }
+                catch (err) {
+                    usernames = Array(6).fill('');
+                }
+                state.usernames = usernames;
 
                 Object.keys(state.evidences).forEach((key) => {
                     let evidences = (storage.getItem(`evidences:${key}`) || JSON.stringify(Array(7).fill(null)));
