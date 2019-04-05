@@ -6,11 +6,11 @@
                     <v-flex
                         v-for="(num, index) in 7"
                         :key="`cell-${index}`"
-                        class="is-evenly-spaced"
+                        class="is-evenly-spaced text-truncate"
                     >
                         <v-card tile :height="22">
-                            <v-card-text class="pa-0 text-xs-center">
-                                <span>{{ String.fromCharCode('A'.codePointAt(0) + index) }}</span>
+                            <v-card-text class="pa-0 text-xs-center text-truncate">
+                                <span>{{ usernames[index] ? usernames[index] : String.fromCharCode('A'.codePointAt(0) + index) }}</span>
                             </v-card-text>
                         </v-card>
                     </v-flex>
@@ -21,7 +21,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: 'detective-list',
+    computed: {
+        ...mapState([
+            'usernames',
+        ]),
+    },
 };
 </script>
