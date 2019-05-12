@@ -4,6 +4,7 @@
   "scripts": {
     "start": "npm run start:hmr",
     "start:hmr": "cross-env NODE_ENV=development webpack-dev-server --config build/dev-hmr.config.js",
+    "start:sw": "cross-env NODE_ENV=development webpack-dev-server --config build/dev-sw.config.js",
     "testing": "cross-env NODE_ENV=testing webpack --progress --hide-modules --config build/prod.config.js",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules --config build/prod.config.js"
   },
