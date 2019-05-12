@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import { mapState, mapGetters } from 'vuex';
 import Vuetify from 'vuetify';
+import { register } from 'register-service-worker';
 import '@mdi/font/scss/materialdesignicons.scss';
 import 'vuetify/dist/vuetify.min.css';
 import '@/assets/application.scss';
@@ -63,29 +64,28 @@ const vm = new Vue({
 });
 
 if ('serviceWorker' in navigator && USING_SW) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then((registration) => {
-                console.log('Service worker registered: ', registration);
-                registration.addEventListener('updatefound', () => {
-                    // If updatefound is fired, it means that there's
-                    // a new service worker being installed.
-                    const installingWorker = registration.installing;
-                    console.log('A new service worker is being installed: ', installingWorker);
-
-                    // You can listen for changes to the installing service worker's
-                    // state via installingWorker.onstatechange
-                    installingWorker.addEventListener('statechange', (event) => {
-                        if (event.target.state === 'activated') {
-                            console.log('A new version of application is available.');
-                            vm.$store.commit('showUpdateNotification');
-                        }
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log('Service worker registration failed: ', error);
-            });
+    register('/service-worker.js', {
+        ready(registration) {
+            console.log('Service worker is active.');
+        },
+        registered(registration) {
+            console.log('Service worker has been registered.');
+        },
+        cached(registration) {
+            console.log('Content has been cached for offline use.');
+        },
+        updatefound(registration) {
+            console.log('New content is downloading.');
+        },
+        updated(registration) {
+            console.log('New content is available; please refresh.');
+        },
+        offline() {
+            console.log('No internet connection found. App is running in offline mode.');
+        },
+        error(error) {
+            console.error('Error during service worker registration: ', error);
+        },
     });
 }
 else {
