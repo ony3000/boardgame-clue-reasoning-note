@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -20,6 +21,9 @@ const prodConfig = merge(baseConfig, {
     chunkFilename: '[name].[chunkhash:7].js'
   },
   plugins: [
+    new webpack.DefinePlugin({
+      USING_SW: JSON.stringify(true)
+    }),
     new CleanWebpackPlugin(['dist'], {
       root: path.resolve(__dirname, '..')
     }),

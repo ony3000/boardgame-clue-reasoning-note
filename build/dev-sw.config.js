@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const baseConfig = require('./base.config');
@@ -12,6 +13,9 @@ const devConfig = merge(baseConfig, {
     overlay: true
   },
   plugins: [
+    new webpack.DefinePlugin({
+      USING_SW: JSON.stringify(true)
+    }),
     new WorkboxPlugin.GenerateSW({
       // these options encourage the ServiceWorkers to get in there fast
       // and not allow any straggling "old" SWs to hang around

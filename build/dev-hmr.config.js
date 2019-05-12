@@ -13,6 +13,9 @@ const devConfig = merge(baseConfig, {
     overlay: true
   },
   plugins: [
+    new webpack.DefinePlugin({
+      USING_SW: JSON.stringify(false)
+    }),
     new webpack.HotModuleReplacementPlugin()
   ]
 });

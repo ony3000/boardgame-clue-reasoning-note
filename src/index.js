@@ -62,7 +62,7 @@ const vm = new Vue({
     },
 });
 
-if ('serviceWorker' in navigator && !['localhost', '127.0.0.1'].includes(location.hostname)) {
+if ('serviceWorker' in navigator && USING_SW) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/service-worker.js')
             .then((registration) => {
