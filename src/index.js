@@ -79,6 +79,7 @@ if ('serviceWorker' in navigator && USING_SW) {
         },
         updated(registration) {
             console.log('New content is available; please refresh.');
+            vm.$store.commit('showUpdateNotification');
         },
         offline() {
             console.log('No internet connection found. App is running in offline mode.');
